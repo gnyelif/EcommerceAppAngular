@@ -1,0 +1,51 @@
+
+<h2>{{title}}</h2>
+
+<div style="margin-top:60px">
+  <h3>Sipariş Listesi</h3>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Müşteri Sipariş No</th>
+          <th>Çıkış Adresi </th>
+          <th>Varış Adresi</th>
+          <th>Miktar</th>
+          <th>Miktar Birim</th>
+          <th>Ağırlık</th>
+          <th>Ağırlık Birim</th>
+          <th>Malzeme Kodu</th>
+          <th>Not</th>
+          <th>Sipariş Durumu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of orders"  >
+          <td>
+            <input type="hidden" value="{{p.orderId}}" #orderId>
+            {{p.customerOrderId}}</td>
+          <td>{{p.senderAddress}}</td>
+          <td>{{p.destinationAddress}}</td>
+          <td>{{p.quantity}}</td>
+          <td>{{p.quantityUnit}}</td>
+          <td>{{p.weight}}</td>
+          <td>{{p.weightUnit}}</td>
+          <td>{{p.materialCode}}</td>
+          <td>{{p.not}}</td>
+          <td>
+            <select name="statusId"  formControlName="statusId" id="statusId" class="form-control form-select"
+            (change)="changeStatus(orderId.value,status.value)" #status>
+              <option *ngFor="let status of orderStatus"  value={{status.id}} >
+                {{status.name}}
+              </option>
+          </select>
+            <!-- {{p.statusId}} -->
+
+            <!-- [selected]="status.id==={{p.statusId}}" -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+
+
